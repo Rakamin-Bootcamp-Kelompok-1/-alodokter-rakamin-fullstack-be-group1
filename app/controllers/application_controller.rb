@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+    # before_action :authorized
     protect_from_forgery with: :null_session
 
   def encode_token(payload)

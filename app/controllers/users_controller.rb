@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
+    skip_before_action :verify_authenticity_token
     before_action :authorized, only: [:auto_login]
+    
 
     #PAGINATION
     def index
