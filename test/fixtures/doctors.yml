@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  doctor_name: MyString
+  speciality: MyString
+  status: MyString
+  star: MyString
+  location_practice: MyString
+  biography: MyText
+  education: MyString
+  price_rate: 1
+
+two:
+  doctor_name: MyString
+  speciality: MyString
+  status: MyString
+  star: MyString
+  location_practice: MyString
+  biography: MyText
+  education: MyString
+  price_rate: 1
