@@ -2,7 +2,6 @@ class UsersController < ApplicationController
     skip_before_action :verify_authenticity_token
     before_action :authorized, only: [:auto_login]
     
-
     #PAGINATION
     def index
         users = User.(params[:page]).per(params[:per_page])
@@ -17,7 +16,7 @@ class UsersController < ApplicationController
     end
 
     #GET ALL USERS
-    def getAllUsers
+    def show
     @doctors = User.all
 
     render json: @doctors
@@ -25,12 +24,12 @@ class UsersController < ApplicationController
 
     #REGISTER
     def create
-    @user = User.create(register_params)
-    if @user.valid?
+    @user = User.create(user_params)
+    if @user.save
       token = encode_token({user_id: @user.id})
       render json: {user: @user, token: token}
     else
-      render json: {error: "Invalid username or password"}
+      render json: {error: "email has already been taken"}, status: 400
     end
   end
 
