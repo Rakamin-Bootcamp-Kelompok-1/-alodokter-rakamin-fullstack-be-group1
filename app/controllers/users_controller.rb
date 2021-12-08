@@ -16,6 +16,13 @@ class UsersController < ApplicationController
         }
     end
 
+    #GET ALL USERS
+    def getAllUsers
+    @doctors = User.all
+
+    render json: @doctors
+  end
+
     #REGISTER
     def create
     @user = User.create(user_params)

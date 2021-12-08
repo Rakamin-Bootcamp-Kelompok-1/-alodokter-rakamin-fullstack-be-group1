@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "/user/:id_user", to: "users#getUserData"
   patch "/user/update/:id_user", to: "users#updateUserData"
   post "/user/add", to: "users#create"
+  get "/users", to: "users#getAllUsers"
 
   resources :articles
   post "/articles", to: "articles#create"
