@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 
     #LOGGIN IN
     def login
-        @user = User.find_by(full_name: params[:full_name])
+        @user = User.find_by(email: params[:email])
 
         if @user && @user.authenticate(params[:password])
             token = encode_token({id_user: @user.id})
