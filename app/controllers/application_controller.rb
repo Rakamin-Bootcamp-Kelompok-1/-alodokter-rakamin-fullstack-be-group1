@@ -2,8 +2,11 @@ class ApplicationController < ActionController::Base
     # before_action :authorized
     protect_from_forgery with: :null_session
 
+    helper_method :login!, :logged_in?, :current_user,     
+    :authorized_user?, :logout!, :set_user
+
   def encode_token(payload)
-    JWT.encode(payload, 'yourSecret')
+    JWT.encode(payload, 'yourSecret', 'HS256')
   end
 
   def auth_header
@@ -11,12 +14,12 @@ class ApplicationController < ActionController::Base
     request.headers['Authorization']
   end
 
-  def decoded_token
+  def decoded_token(token)
     if auth_header
       token = auth_header.split(' ')[1]
       # header: { 'Authorization': 'Bearer <token>' }
       begin
-        JWT.decode(token, 'yourSecret', true, algorithm: 'HS256')
+        JWT.decode(token, 'yourSecret', true, {algorithm: 'HS256'})[0]
       rescue JWT::DecodeError
         nil
       end
