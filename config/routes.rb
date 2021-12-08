@@ -20,4 +20,7 @@ Rails.application.routes.draw do
   post "/doctors/new", to: "doctors#create"
   patch "/doctor/:id", to: "doctors#update"
   delete "doctor/:id", to: "doctors#destroy"
+
+  resource :patients, only: [:create]
+  post "/patient/add", to: "patients#create"
 end

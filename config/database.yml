@@ -23,8 +23,8 @@ default: &default
 
 development:
   <<: *default
-  username: keyzafirstanto
-  password: Analaska_1997
+  username: nurul
+  password: 123postgres
   database: alodokter_be_development
 
   # The specified database role being used to connect to postgres.
