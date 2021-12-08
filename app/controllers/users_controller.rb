@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
     #REGISTER
     def create
-    @user = User.create(user_params)
+    @user = User.create(register_params)
     if @user.valid?
       token = encode_token({user_id: @user.id})
       render json: {user: @user, token: token}
@@ -36,14 +36,21 @@ class UsersController < ApplicationController
 
     #LOGGIN IN
     def login
-        @user = User.find_by(email: params[:email])
-
-        if @user && @user.authenticate(params[:password])
-            token = encode_token({id_user: @user.id})
-            render json: {user: @user, token: token}
+        user = User.find_by(email: params[:email])
+        if user && user.authenticate(params[:password])
+            payload = {id_user: user.id}
+            token = encode_token(payload)
+            render :json => {user: user, token: token}
         else
             render json: {error: "Invalid username or password"}
         end
+    end
+
+    def token_authenticate
+        token = request.headers["Authenticate"]
+        user = User.find(decoded_token(token)["id_user"])
+
+        render json: user
     end
 
 
@@ -100,6 +107,10 @@ class UsersController < ApplicationController
     def user_params
         params.permit(:full_name, :password, :age, :email, :gender, :birth_date, :phone_number, :image_path, :is_admin, :is_active)
     end
+
+    # def register_params
+    #     params.permit(:full_name, :password, :age, :email, :gender, :birth_date, :phone_number, :image_path, :is_admin ::false, :is_active ::false)
+    # end
 
     def update_params
         params.permit(:full_name, :password, :age, :email, :gender, :birth_date, :phone_number, :image_path, :is_admin, :is_active)

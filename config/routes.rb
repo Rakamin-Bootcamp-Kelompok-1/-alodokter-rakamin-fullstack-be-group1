@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resource :users, only: [:create]
+  resource :users, only: [:create, :show, :index]
   post "/login", to: "users#login"
-  get "/auto_login", to: "users#auto_login"
+  get "/token_authenticate", to: "users#token_authenticate"
+  post '/logout', to: 'users#destroy'
   get "/user/:id_user", to: "users#getUserData"
   patch "/user/update/:id_user", to: "users#updateUserData"
   post "/user/add", to: "users#create"
