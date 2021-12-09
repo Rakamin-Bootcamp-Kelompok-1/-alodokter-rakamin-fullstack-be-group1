@@ -1,4 +1,5 @@
 class SchedulesController < ApplicationController
+
     # GET ALL SCHEDULES
     def index
         @schedules = DoctorSchedule.all
@@ -45,4 +46,5 @@ class SchedulesController < ApplicationController
     def schedule_params
         params.permit(:id_doctor, :day, :date, :month, :year, :time_practice)
     end
+
 end
