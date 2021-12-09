@@ -31,10 +31,24 @@ ActiveRecord::Schema.define(version: 2021_12_08_120352) do
     t.integer "total_price"
     t.bigint "doctor_id"
     t.bigint "patient_id"
+    t.bigint "doctor_schedule_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["doctor_id"], name: "index_bookings_on_doctor_id"
+    t.index ["doctor_schedule_id"], name: "index_bookings_on_doctor_schedule_id"
     t.index ["patient_id"], name: "index_bookings_on_patient_id"
+  end
+
+  create_table "doctor_schedules", force: :cascade do |t|
+    t.bigint "doctor_id"
+    t.string "day"
+    t.string "date"
+    t.string "month"
+    t.string "year"
+    t.string "time_practice"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["doctor_id"], name: "index_doctor_schedules_on_doctor_id"
   end
 
   create_table "doctors", force: :cascade do |t|
@@ -56,8 +70,8 @@ ActiveRecord::Schema.define(version: 2021_12_08_120352) do
     t.string "status"
     t.string "gender"
     t.string "birth_date"
-    t.string "blood_type"
     t.integer "age"
+    t.string "blood_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

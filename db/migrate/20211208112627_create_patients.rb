@@ -5,9 +5,8 @@ class CreatePatients < ActiveRecord::Migration[6.1]
       t.string :status
       t.string :gender
       t.string :birth_date
-      t.string :blood_type
       t.integer :age
-      
+      t.string :blood_type
       t.timestamps
     end
   end
