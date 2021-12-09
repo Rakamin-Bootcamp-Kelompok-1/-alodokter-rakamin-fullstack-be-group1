@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_07_122059) do
+ActiveRecord::Schema.define(version: 2021_12_09_125849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,33 @@ ActiveRecord::Schema.define(version: 2021_12_07_122059) do
     t.integer "id_user"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "main_article"
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.text "message"
+    t.string "payment_method"
+    t.integer "total_price"
+    t.bigint "doctor_id"
+    t.bigint "patient_id"
+    t.bigint "doctor_schedule_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["doctor_id"], name: "index_bookings_on_doctor_id"
+    t.index ["doctor_schedule_id"], name: "index_bookings_on_doctor_schedule_id"
+    t.index ["patient_id"], name: "index_bookings_on_patient_id"
+  end
+
+  create_table "doctor_schedules", force: :cascade do |t|
+    t.bigint "doctor_id"
+    t.string "day"
+    t.string "date"
+    t.string "month"
+    t.string "year"
+    t.string "time_practice"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["doctor_id"], name: "index_doctor_schedules_on_doctor_id"
   end
 
   create_table "doctors", force: :cascade do |t|
@@ -37,6 +64,17 @@ ActiveRecord::Schema.define(version: 2021_12_07_122059) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image_path"
+  end
+
+  create_table "patients", force: :cascade do |t|
+    t.string "patient_name"
+    t.string "status"
+    t.string "gender"
+    t.string "birth_date"
+    t.integer "age"
+    t.string "blood_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
