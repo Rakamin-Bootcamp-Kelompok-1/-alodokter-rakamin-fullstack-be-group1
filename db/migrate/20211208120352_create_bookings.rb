@@ -4,7 +4,8 @@ class CreateBookings < ActiveRecord::Migration[6.1]
       t.text :message
       t.string :payment_method
       t.integer :total_price
-      
+      t.belongs_to :doctor
+      t.belongs_to :patient
       t.timestamps
     end
   end

@@ -30,4 +30,11 @@ Rails.application.routes.draw do
   post "/patients", to: "patients#create"
   patch "/patient/:id", to: "patients#update"
   delete "patient/:id", to: "patients#destroy"
+
+  resources :bookings
+  post "/bookings", to: "bookings#create"
+  get "/bookings", to: "bookings#index"
+  get "/bookings/:id", to: "bookings#show"
+  patch "bookings/:id", to: "bookings#update"
+  delete "bookings/:id", to: "bookings#destroy"
 end

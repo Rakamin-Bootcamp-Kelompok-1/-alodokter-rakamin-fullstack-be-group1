@@ -29,8 +29,12 @@ ActiveRecord::Schema.define(version: 2021_12_08_120352) do
     t.text "message"
     t.string "payment_method"
     t.integer "total_price"
+    t.bigint "doctor_id"
+    t.bigint "patient_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["doctor_id"], name: "index_bookings_on_doctor_id"
+    t.index ["patient_id"], name: "index_bookings_on_patient_id"
   end
 
   create_table "doctors", force: :cascade do |t|

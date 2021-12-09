@@ -51,8 +51,12 @@ class PatientsController < ApplicationController
       end
     
       private
+      def set_patients
+        @patient = Patient.find(params[:id])
+      end
+  
         # Only allow a list of trusted parameters through.
-        def patients_params
-          params.permit(:patient_name, :status, :gender, :birth_date, :blood_type, :age)
-        end
+      def patients_params
+        params.permit(:patient_name, :status, :gender, :birth_date, :blood_type, :age)
+      end
 end
