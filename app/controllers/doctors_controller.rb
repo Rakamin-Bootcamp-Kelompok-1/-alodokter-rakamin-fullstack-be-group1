@@ -57,4 +57,5 @@ class DoctorsController < ApplicationController
     def doctors_params
       params.permit(:doctor_name, :image_path, :speciality, :status, :star, :location_practice, :biography, :education, :price_rate)
     end
+  
 end

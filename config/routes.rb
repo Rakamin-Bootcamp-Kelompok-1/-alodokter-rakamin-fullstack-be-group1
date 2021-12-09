@@ -23,4 +23,26 @@ Rails.application.routes.draw do
   post "/doctors/new", to: "doctors#create"
   patch "/doctor/:id", to: "doctors#update"
   delete "doctor/:id", to: "doctors#destroy"
+
+  resource :patients, only: [:create]
+
+  get "/patients", to: "patients#index"
+  get "patient/:id", to: "patients#show"
+  post "/patients", to: "patients#create"
+  patch "/patient/:id", to: "patients#update"
+  delete "patient/:id", to: "patients#destroy"
+
+  resources :bookings
+  post "/bookings", to: "bookings#create"
+  get "/bookings", to: "bookings#index"
+  get "/bookings/:id", to: "bookings#show"
+  patch "bookings/:id", to: "bookings#update"
+  delete "bookings/:id", to: "bookings#destroy"
+  
+  resource :schedules, only: [:create]
+  get "/schedules", to: "schedules#index"
+  get "/schedule/doctor", to: "schedules#find_schedule"
+  post "/schedule/add", to: "schedules#create"
+  patch "/schedule/:id", to: "schedules#update"
+
 end
