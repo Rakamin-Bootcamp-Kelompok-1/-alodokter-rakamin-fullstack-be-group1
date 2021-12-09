@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2021_12_08_112737) do
-=======
 ActiveRecord::Schema.define(version: 2021_12_08_120352) do
->>>>>>> fb30642c3a014a71a2a184bed23b5dab13014f7b
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,19 +25,21 @@ ActiveRecord::Schema.define(version: 2021_12_08_120352) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-<<<<<<< HEAD
-  create_table "doctor_schedules", force: :cascade do |t|
-    t.string "id_doctor"
-    t.string "day"
-    t.string "month"
-    t.string "year"
-    t.string "time_practice"
-=======
   create_table "bookings", force: :cascade do |t|
     t.text "message"
     t.string "payment_method"
     t.integer "total_price"
->>>>>>> fb30642c3a014a71a2a184bed23b5dab13014f7b
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "doctor_schedules", force: :cascade do |t|
+    t.string "id_doctor"
+    t.string "day"
+    t.string "date"
+    t.string "month"
+    t.string "year"
+    t.string "time_practice"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -65,13 +63,8 @@ ActiveRecord::Schema.define(version: 2021_12_08_120352) do
     t.string "status"
     t.string "gender"
     t.string "birth_date"
-<<<<<<< HEAD
     t.integer "age"
     t.string "blood_type"
-=======
-    t.string "blood_type"
-    t.integer "age"
->>>>>>> fb30642c3a014a71a2a184bed23b5dab13014f7b
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
