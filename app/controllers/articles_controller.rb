@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
 
       # GET /articles
   def index
-    @articles = Article.all
+    @articles = Article.page(params[:page])
 
     render json: @articles
   end
@@ -11,6 +11,21 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   def show
     render json: @article
+  end
+
+  #GET /articles/category
+  def findby_category
+
+    @articles = Article.where("article_category = ?", params[:article_category])
+
+        render :json => @articles,
+        status: :ok
+
+        rescue ActiveRecord::RecordNotFound => e
+        render json: {
+            message: e
+        }, status: :not_found
+
   end
 
   # POST /articles
@@ -46,6 +61,6 @@ class ArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.require(:article).permit(:article_category, :article_title, :content_desc, :image_url)
+      params.require(:article).permit(:article_category, :article_title, :content_desc, :image_url, :main_article)
     end
 end
