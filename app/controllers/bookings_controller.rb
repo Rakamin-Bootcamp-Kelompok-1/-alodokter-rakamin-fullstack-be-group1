@@ -2,7 +2,8 @@ class BookingsController < ApplicationController
     before_action :set_booking, only: [:show, :update, :destroy]
 
     def index
-        @bookings = Booking.all
+        @bookings = Booking.page(params[:page])
+
     
         render json: @bookings
     end

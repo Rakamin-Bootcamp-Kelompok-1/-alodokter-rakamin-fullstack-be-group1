@@ -9,11 +9,17 @@ Rails.application.routes.draw do
   post "/user/add", to: "users#create"
   get "/users", to: "users#show"
   delete 'users/:id_user', to: "users#deleteUser"
+
+    #forgot password
+  resource :passwords, only: [:create]
+  post 'password/forgot', to: 'passwords#forgot'
+  post 'password/reset/:token', to: 'passwords#reset' 
   
   resources :articles
   post "/articles", to: "articles#create"
   get "/articles", to: "articles#index"
   get "/articles", to: "articles#show"
+  get "/article/category", to: "articles#findby_category"
   patch "articles/:id", to: "articles#update"
   delete "articles/:id", to: "articles#destroy"
 

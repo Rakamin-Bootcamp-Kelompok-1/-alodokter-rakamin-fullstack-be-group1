@@ -3,14 +3,29 @@ class ArticlesController < ApplicationController
 
       # GET /articles
   def index
-    @articles = Article.all
+    @articles = Article.page(params[:page])
 
-    render json: @articles
+    # render json: @articles
   end
 
   # GET /articles/1
   def show
     render json: @article
+  end
+
+  #GET /articles/category
+  def findby_category
+
+    @articles = Article.where("article_category = ?", params[:article_category])
+
+        render :json => @articles,
+        status: :ok
+
+        rescue ActiveRecord::RecordNotFound => e
+        render json: {
+            message: e
+        }, status: :not_found
+
   end
 
   # POST /articles
