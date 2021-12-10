@@ -1,0 +1,29 @@
+
+        
+
+<h1>Articles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.article_category %></td>
+        <td><%= article.article_title %></td>
+        <td><%= article.content_desc %></td>
+      </tr>
+    <% end %>
+    
+  </tbody>
+  
+</table>
+<%= paginate @articles %>
+
+<br>
