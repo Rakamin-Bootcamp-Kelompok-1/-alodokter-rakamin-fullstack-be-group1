@@ -31,8 +31,8 @@ gem "image_processing", ">= 1.2"
 
 gem 'faker'
 
-# Kaminari pagination
-gem 'kaminari'
+#pagination gem
+gem 'kaminari', :git => 'https://github.com/kaminari/kaminari'
 
 
 
