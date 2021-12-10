@@ -36,9 +36,10 @@ Rails.application.routes.draw do
   post "/bookings", to: "bookings#create"
   get "/bookings", to: "bookings#index"
   get "/bookings/:id", to: "bookings#show"
+  get "/bookings/:doctor_id/doctor/:patient_id/patient/:doctor_schedule_id", to: "bookings#show2"
   patch "bookings/:id", to: "bookings#update"
   delete "bookings/:id", to: "bookings#destroy"
-  
+
   resource :schedules, only: [:create]
   get "/schedules", to: "schedules#index"
   get "/schedule/doctor", to: "schedules#find_schedule"

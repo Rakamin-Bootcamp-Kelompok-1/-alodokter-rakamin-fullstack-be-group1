@@ -17,10 +17,32 @@ class BookingsController < ApplicationController
             message: e
         }, status: :not_found
       end
+
+
+    def show2
+        booking = Booking.find(params[:id])
+    
+        render :json => booking, status: :ok
+    
+      rescue ActiveRecord::RecordNotFound => e
+        render json: {
+            message: e
+        }, status: :not_found
+      end
     
       # POST /bookings
       def create
         @bookings = Booking.new(bookings_params)
+    
+        if @bookings.save
+          render json: @bookings, status: :created
+        else
+          render json: @bookings.errors, status: :unprocessable_entity
+        end
+      end
+
+      def create2
+        @bookings = Booking.new(:message, :payment_method, :total_price, :doctor_id, :patient_id, :doctor_schedule_id)
     
         if @bookings.save
           render json: @bookings, status: :created
