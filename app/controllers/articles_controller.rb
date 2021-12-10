@@ -13,6 +13,21 @@ class ArticlesController < ApplicationController
     render json: @article
   end
 
+  #GET /articles/category
+  def findby_category
+
+    @articles = Article.where("article_category = ?", params[:article_category])
+
+        render :json => @articles,
+        status: :ok
+
+        rescue ActiveRecord::RecordNotFound => e
+        render json: {
+            message: e
+        }, status: :not_found
+
+  end
+
   # POST /articles
   def create
     @article = Article.new(article_params)

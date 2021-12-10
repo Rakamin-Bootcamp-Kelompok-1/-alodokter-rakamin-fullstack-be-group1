@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post "/articles", to: "articles#create"
   get "/articles", to: "articles#index"
   get "/articles", to: "articles#show"
+  get "/article/category", to: "articles#findby_category"
   patch "articles/:id", to: "articles#update"
   delete "articles/:id", to: "articles#destroy"
 
