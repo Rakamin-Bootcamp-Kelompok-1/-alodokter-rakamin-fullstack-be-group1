@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   post "/user/add", to: "users#create"
   get "/users", to: "users#show"
   delete 'users/:id_user', to: "users#deleteUser"
+
+    #forgot password
+  resource :passwords, only: [:create]
+  post 'password/forgot', to: 'passwords#forgot'
+  post 'password/reset/:token', to: 'passwords#reset' 
   
   resources :articles
   post "/articles", to: "articles#create"
