@@ -3,7 +3,7 @@ class DoctorsController < ApplicationController
   def index
     @doctors = Doctor.page(params[:page])
 
-    render json: @doctors
+    # render json: @doctors
   end
 
   # GET /doctors/1
