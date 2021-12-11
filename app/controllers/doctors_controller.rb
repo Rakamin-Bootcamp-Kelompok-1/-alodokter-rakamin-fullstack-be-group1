@@ -3,7 +3,16 @@ class DoctorsController < ApplicationController
   def index
     @doctors = Doctor.page(params[:page])
 
-    # render json: @doctors
+    render json: {
+            data: @doctors,
+            meta:{
+                page: params[:page],
+                per_page: params[:per_page],
+                next_page: @doctors.next_page,
+                prev_page: @doctors.prev_page,
+                total_page: @doctors.total_pages
+            }
+        },status: :ok
   end
 
   # GET /doctors/1
@@ -44,7 +53,7 @@ class DoctorsController < ApplicationController
 
     doctor.destroy
 
-    render :json => {}, status: :ok
+    render json: {status:200, msg: 'Data doctor has been deleted.'}
   end
 
   private

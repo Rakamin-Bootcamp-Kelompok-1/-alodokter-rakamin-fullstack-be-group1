@@ -3,15 +3,23 @@ class SchedulesController < ApplicationController
     def index
         @schedules = DoctorSchedule.all
     
-       render json: @schedules
+        
+        render json: @schedules
     end
 
     #GET SCHEDULE DOCTOR FIND BY ID DOCTOR
     def find_schedule
-        @schedules = DoctorSchedule.where("id_doctor = ?", params[:id_doctor])
-
-        render :json => @schedules,
-        status: :ok
+        @schedules = DoctorSchedule.where("doctor_id = ?", params[:doctor_id]).page(params[:page])
+        render json: {
+            data: @schedules,
+            meta:{
+                page: params[:page],
+                per_page: params[:per_page],
+                next_page: @schedules.next_page,
+                prev_page: @schedules.prev_page,
+                total_page: @schedules.total_pages
+            }
+        },status: :ok
 
         rescue ActiveRecord::RecordNotFound => e
         render json: {

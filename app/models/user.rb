@@ -1,6 +1,8 @@
 class User < ApplicationRecord
     validates_uniqueness_of :email
     has_secure_password
+    has_many :bookings
+    has_many :patients
 
     def generate_password_token!
           self.reset_password_token = generate_token
