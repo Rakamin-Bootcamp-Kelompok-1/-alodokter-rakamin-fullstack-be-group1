@@ -19,7 +19,7 @@ class PatientsController < ApplicationController
       end
 
       def list_patient
-        @patients = Patient.where("user_id = ?",params[:user_id]).page(params[:page])
+        @patients = Patient.where("user_id = ?",params[:user_id]).page(params[:page]).per(params[:per_page])
 
         render json: {
             data: @patients,

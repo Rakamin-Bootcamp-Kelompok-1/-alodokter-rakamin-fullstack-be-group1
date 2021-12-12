@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
 
       # GET /articles
   def index
-    @articles = Article.page(params[:page])
+    @articles = Article.page(params[:page]).per(params[:per_page])
 
     render json: {
             data: @articles,
@@ -26,7 +26,7 @@ class ArticlesController < ApplicationController
   #GET /articles/category
   def findby_category
 
-    @articles = Article.where("article_category = ?", params[:article_category]).page(params[:page])
+    @articles = Article.where("article_category = ?", params[:article_category]).page(params[:page]).per(params[:per_page])
 
         render json: {
             data: @articles,

@@ -9,7 +9,7 @@ class SchedulesController < ApplicationController
 
     #GET SCHEDULE DOCTOR FIND BY ID DOCTOR
     def find_schedule
-        @schedules = DoctorSchedule.where("doctor_id = ?", params[:doctor_id]).page(params[:page])
+        @schedules = DoctorSchedule.where("doctor_id = ?", params[:doctor_id]).page(params[:page]).per(params[:per_page])
         render json: {
             data: @schedules,
             meta:{
@@ -47,6 +47,15 @@ class SchedulesController < ApplicationController
 
         render :json => schedule
 
+    end
+
+    # DELETE 
+    def destroy
+        schedule = DoctorSchedule.find(params[:id])
+    
+        schedule.destroy
+    
+        render json: {status:200, msg: 'Schedule has been deleted.'}
     end
 
     private 

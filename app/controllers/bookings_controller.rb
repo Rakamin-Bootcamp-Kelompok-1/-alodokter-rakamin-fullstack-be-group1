@@ -2,7 +2,7 @@ class BookingsController < ApplicationController
     before_action :set_booking, only: [:show, :update, :destroy]
 
     def index
-        @bookings = Booking.page(params[:page])
+        @bookings = Booking.page(params[:page]).per(params[:per_page])
 
         render json: {
             data: @bookings,
@@ -28,7 +28,7 @@ class BookingsController < ApplicationController
       end
       
     def history
-      @bookings = Booking.where("user_id = ?",params[:user_id]).order("created_at DESC").page(params[:page])
+      @bookings = Booking.where("user_id = ?",params[:user_id]).order("created_at DESC").page(params[:page]).per(params[:per_page])
 
       render json: {
             data: @bookings,

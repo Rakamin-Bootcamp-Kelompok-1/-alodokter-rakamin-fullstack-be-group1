@@ -52,5 +52,6 @@ Rails.application.routes.draw do
   get "/schedule/doctor", to: "schedules#find_schedule"
   post "/schedule/add", to: "schedules#create"
   patch "/schedule/:id", to: "schedules#update"
+  delete "/schedule/:id", to: "schedules#destroy"
 
 end
