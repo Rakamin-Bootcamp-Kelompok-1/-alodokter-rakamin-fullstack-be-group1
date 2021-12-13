@@ -1,7 +1,7 @@
 class DoctorsController < ApplicationController
          # GET /doctors
   def index
-    @doctors = Doctor.page(params[:page]).per(params[:per_page])
+    @doctors = Doctor.page(params[:page])
 
     render json: {
             data: @doctors,

@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
 
       # GET /articles
   def index
-    @articles = Article.page(params[:page]).per(params[:per_page])
+    @articles = Article.page(params[:page])
 
     render json: {
             data: @articles,
