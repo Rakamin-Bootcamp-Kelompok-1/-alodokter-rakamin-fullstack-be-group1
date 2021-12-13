@@ -1,7 +1,8 @@
-<h1>Reset Password</h1>
+<h1 class="">Reset Password</h1>
 
 <%= form_with do |f| %>
-  <div class='field'>
+  
+  <div class='d-flex justify-content-center'>
     <%= f.label :email %> 
     <br/>
     <%= f.email_field :email %>
@@ -9,6 +10,12 @@
     <%= f.label :password %>
      <br/>
     <%= f.password_field :password %>
+      <br/>
+    <%= f.label :password_confirmation %>
+      <br/>
+     <%= f.password_field :password_confirmation %>
+
+
    
   </div>
    <br/>
