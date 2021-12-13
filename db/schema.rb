@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_123847) do
     t.string "email"
     t.string "gender"
     t.string "birth_date"
-    t.integer "phone_number"
+    t.string "phone_number"
     t.string "image_path"
     t.boolean "is_admin"
     t.boolean "is_active"

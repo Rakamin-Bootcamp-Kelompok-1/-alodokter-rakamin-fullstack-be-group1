@@ -56,6 +56,16 @@ class BookingsController < ApplicationController
           render json: @bookings.errors, status: :unprocessable_entity
         end
       end
+
+      def create2
+        @bookings = Booking.new(:message, :payment_method, :total_price, :doctor_id, :patient_id, :doctor_schedule_id)
+    
+        if @bookings.save
+          render json: @bookings, status: :created
+        else
+          render json: @bookings.errors, status: :unprocessable_entity
+        end
+      end
     
       # PATCH/PUT /bookings/1
       def update
