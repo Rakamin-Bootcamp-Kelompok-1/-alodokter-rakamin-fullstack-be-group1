@@ -2,32 +2,4 @@
         
 
 <h1>Articles</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Body</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @doctors.each do |doctor| %>
-      <tr>
-        <td><%= doctor.doctor_name %></td>
-        <td><%= doctor.speciality %></td>
-        <td><%= doctor.location_practice %></td>
-        <td><%= doctor.biography %></td>
-        <td><%= doctor.education %></td>
-        <td><%= doctor.price_rate %></td>
-        <td><img href="<%= doctor.image_path %>"/><%= doctor.image_path %></td>
-      </tr>
-    <% end %>
-    
-  </tbody>
-  
-</table>
 <%= paginate @doctors %>
-
-<br>

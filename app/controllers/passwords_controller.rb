@@ -17,6 +17,11 @@ class PasswordsController < ApplicationController
         end
     end
 
+  def edit
+    @user = User.find_by(email: params[:email])
+   
+  end
+
   def reset
     token = params[:token].to_s
 
@@ -24,16 +29,22 @@ class PasswordsController < ApplicationController
       return render json: {error: "Token not present"}
     end
 
-    user = User.find_by(reset_password_token: token)
+    user = User.find_by(reset_password_token: params[:reset_password_token])
 
     if user.present? && user.password_token_valid?
       if user.reset_password!(params[:password])
-        render json: {message: "Your password has successfully been updated."}, status: :ok
+        render json: {message: "Your password has successfully been updated."}, status: 200
       else
         render json: {error: user.errors.full_messages}, status: :unprocessable_entity
       end
     else
       render json: {error:  ["Link not valid or expired. Try generating a new link."]}, status: :not_found
     end
+  end
+
+  private
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:password)
   end
 end
