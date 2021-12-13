@@ -3,13 +3,13 @@ class ArticlesController < ApplicationController
 
       # GET /articles
   def index
-    @articles = Article.page(params[:page])
+    @articles = Article.page(params[:page]).per(params[:per_page])
 
     render json: {
             data: @articles,
             meta:{
                 page: params[:page],
-                per_page: params[:per_page],
+                # per_page: params[:per_page],
                 next_page: @articles.next_page,
                 prev_page: @articles.prev_page,
                 total_page: @articles.total_pages
