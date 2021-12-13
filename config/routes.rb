@@ -13,7 +13,8 @@ Rails.application.routes.draw do
     #forgot password
   resource :passwords, only: [:create]
   post 'password/forgot', to: 'passwords#forgot'
-  post 'password/reset/:token', to: 'passwords#reset' 
+  get 'password/edit/:reset_password_token', to: 'passwords#edit'
+  post 'password/edit/:reset_password_token', to: 'passwords#reset' 
   
   resources :articles
   post "/articles", to: "articles#create"
