@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_13_084547) do
+ActiveRecord::Schema.define(version: 2021_12_14_082449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2021_12_13_084547) do
   create_table "articles", force: :cascade do |t|
     t.string "article_category"
     t.string "article_title"
-    t.string "image_url"
+    t.text "image_data"
     t.text "content_desc"
     t.integer "id_user"
     t.datetime "created_at", precision: 6, null: false
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 2021_12_13_084547) do
     t.string "gender"
     t.string "birth_date"
     t.string "phone_number"
-    t.string "image_path"
+    t.string "image_data"
     t.boolean "is_admin"
     t.boolean "is_active"
     t.datetime "created_at", precision: 6, null: false

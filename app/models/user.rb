@@ -4,6 +4,11 @@ class User < ApplicationRecord
     has_many :bookings
     has_many :patients
 
+    include ImageUploader::Attachment(:image)
+
+    validates :full_name, presence: true
+
+
     def generate_password_token!
           self.reset_password_token = generate_token
           self.reset_password_sent_at = Time.now.utc
