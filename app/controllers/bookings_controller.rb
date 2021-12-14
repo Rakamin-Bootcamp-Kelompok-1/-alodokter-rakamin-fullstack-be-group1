@@ -8,7 +8,7 @@ class BookingsController < ApplicationController
             data: @bookings,
             meta:{
                 page: params[:page],
-                per_page: params[:per_page],
+                # per_page: params[:per_page],
                 next_page: @bookings.next_page,
                 prev_page: @bookings.prev_page,
                 total_page: @bookings.total_pages
@@ -34,7 +34,7 @@ class BookingsController < ApplicationController
             data: @bookings,
             meta:{
                 page: params[:page],
-                per_page: params[:per_page],
+                # per_page: params[:per_page],
                 next_page: @bookings.next_page,
                 prev_page: @bookings.prev_page,
                 total_page: @bookings.total_pages

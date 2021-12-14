@@ -14,7 +14,7 @@ class SchedulesController < ApplicationController
             data: @schedules,
             meta:{
                 page: params[:page],
-                per_page: params[:per_page],
+                # per_page: params[:per_page],
                 next_page: @schedules.next_page,
                 prev_page: @schedules.prev_page,
                 total_page: @schedules.total_pages

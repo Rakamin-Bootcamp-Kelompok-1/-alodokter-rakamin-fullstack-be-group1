@@ -7,7 +7,7 @@ class DoctorsController < ApplicationController
             data: @doctors,
             meta:{
                 page: params[:page],
-                per_page: params[:per_page],
+                # per_page: params[:per_page],
                 next_page: @doctors.next_page,
                 prev_page: @doctors.prev_page,
                 total_page: @doctors.total_pages

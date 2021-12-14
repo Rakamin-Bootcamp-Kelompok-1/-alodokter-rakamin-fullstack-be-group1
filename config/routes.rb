@@ -32,7 +32,6 @@ Rails.application.routes.draw do
   delete "doctor/:id", to: "doctors#destroy"
 
   resource :patients, only: [:create]
-
   get "/patients", to: "patients#index"
   get "/patient/:id", to: "patients#show"
   get "/patients/list", to: "patients#list_patient"
