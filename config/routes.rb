@@ -19,11 +19,11 @@ Rails.application.routes.draw do
   resources :articles
   post "/articles", to: "articles#create"
   get "/articles", to: "articles#index"
-  get "/articles", to: "articles#show"
-  get "/article/category", to: "articles#findby_category"
+  get "/article/:id", to: "articles#show"
+  post "/article/category", to: "articles#findby_category"
   patch "articles/:id", to: "articles#update"
   delete "articles/:id", to: "articles#destroy"
-  get "article/search", to: "articles#search"
+  post "article/search", to: "articles#search"
 
   resource :doctors, only: [:create]
   get "/doctors", to: "doctors#index"
@@ -31,11 +31,13 @@ Rails.application.routes.draw do
   post "/doctors/new", to: "doctors#create"
   patch "/doctor/:id", to: "doctors#update"
   delete "doctor/:id", to: "doctors#destroy"
+  post "doctors/search", to: "doctors#search"
+  post "doctors/category", to: "doctors#findby_category"
 
   resource :patients, only: [:create]
   get "/patients", to: "patients#index"
   get "/patient/:id", to: "patients#show"
-  get "/patients/list", to: "patients#list_patient"
+  post "/patients/list", to: "patients#list_patient"
   post "/patients", to: "patients#create"
   patch "/patient/:id", to: "patients#update"
   delete "patient/:id", to: "patients#destroy"
@@ -44,13 +46,13 @@ Rails.application.routes.draw do
   post "/bookings", to: "bookings#create"
   get "/bookings", to: "bookings#index"
   get "/bookings/:id", to: "bookings#show"
-  get "/booking/history", to:"bookings#history"
+  post "/booking/history", to:"bookings#history"
   patch "bookings/:id", to: "bookings#update"
   delete "bookings/:id", to: "bookings#destroy"
 
   resource :schedules, only: [:create]
   get "/schedules", to: "schedules#index"
-  get "/schedule/doctor", to: "schedules#find_schedule"
+  post "/schedule/doctor", to: "schedules#find_schedule"
   post "/schedule/add", to: "schedules#create"
   patch "/schedule/:id", to: "schedules#update"
   delete "/schedule/:id", to: "schedules#destroy"
