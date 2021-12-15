@@ -6,6 +6,7 @@ class CreateArticles < ActiveRecord::Migration[6.1]
       t.string :image_url
       t.text :content_desc
       t.integer :id_user
+      t.boolean :main_article
 
       t.timestamps
     end

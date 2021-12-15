@@ -23,6 +23,26 @@ class ArticlesController < ApplicationController
     render json: @article
   end
 
+  #GET /articles/search
+  def search
+    @articles = Article.where("article_title LIKE ?", "%" + params[:article_title] + "%").page(params[:page]).per(params[:per_page])
+    render json: {
+            data: @articles,
+            meta:{
+                page: params[:page],
+ #               per_page: params[:per_page],
+                next_page: @articles.next_page,
+                prev_page: @articles.prev_page,
+                total_page: @articles.total_pages
+            }
+        },status: :ok
+
+        rescue ActiveRecord::RecordNotFound => e
+        render json: {
+            message: e
+        }, status: :not_found
+  end
+  
   #GET /articles/category
   def findby_category
 
