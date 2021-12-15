@@ -4,9 +4,9 @@ class User < ApplicationRecord
     has_many :bookings
     has_many :patients
 
-    include ImageUploader::Attachment(:image)
+#     include ImageUploader::Attachment(:image)
 
-    validates :full_name, presence: true
+#     validates :full_name, presence: true
 
 
     def generate_password_token!

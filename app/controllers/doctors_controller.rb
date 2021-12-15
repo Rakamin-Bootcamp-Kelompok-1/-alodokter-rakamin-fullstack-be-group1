@@ -38,6 +38,48 @@ class DoctorsController < ApplicationController
     end
   end
 
+  #GET /doctors/search
+  def search
+    @doctors = Doctor.where("doctor_name LIKE ?", "%" + params[:doctor_name] + "%").page(params[:page]).per(params[:per_page])
+    render json: {
+            data: @doctors,
+            meta:{
+                page: params[:page],
+ #               per_page: params[:per_page],
+                next_page: @doctors.next_page,
+                prev_page: @doctors.prev_page,
+                total_page: @doctors.total_pages
+            }
+        },status: :ok
+
+        rescue ActiveRecord::RecordNotFound => e
+        render json: {
+            message: e
+        }, status: 400
+  end
+  
+  #GET /articles/category
+  def findby_category
+    @doctors = Doctor.where("speciality = ?", params[:speciality]).page(params[:page]).per(params[:per_page])
+
+        render json: {
+            data: @doctors,
+            meta:{
+                page: params[:page],
+                per_page: params[:per_page],
+                next_page: @doctors.next_page,
+                prev_page: @doctors.prev_page,
+                total_page: @doctors.total_pages
+            }
+        },status: :ok
+
+        rescue ActiveRecord::RecordNotFound => e
+        render json: {
+            message: e
+        }, status: 400
+
+  end
+
   # PATCH/PUT /doctors/1
   def update
     doctor = Doctor.find(params[:id])
