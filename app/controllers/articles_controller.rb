@@ -23,6 +23,26 @@ class ArticlesController < ApplicationController
     render json: @article
   end
 
+  #GET /articles/search
+  def search
+    @articles = Article.where("article_title LIKE ?", "%" + params[:article_title] + "%").page(params[:page]).per(params[:per_page])
+    render json: {
+            data: @articles,
+            meta:{
+                page: params[:page],
+ #               per_page: params[:per_page],
+                next_page: @articles.next_page,
+                prev_page: @articles.prev_page,
+                total_page: @articles.total_pages
+            }
+        },status: :ok
+
+        rescue ActiveRecord::RecordNotFound => e
+        render json: {
+            message: e
+        }, status: :not_found
+  end
+  
   #GET /articles/category
   def findby_category
 
@@ -80,6 +100,6 @@ class ArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.require(:article).permit(:article_category, :article_title, :content_desc, :image_url, :main_article)
+      params.permit(:article_category, :article_title, :content_desc, :image_data, :main_article)
     end
 end
