@@ -69,11 +69,11 @@ class BookingsController < ApplicationController
     
       # PATCH/PUT /bookings/1
       def update
-        booking = Booking.find(params[:id])
-    
-        booking.update(bookings_params)
-    
-        render :json => booking
+        if @bookings.update(bookings_params)
+          render json: @bookings
+        else
+          render json: @bookings.errors, status: :unprocessable_entity
+        end
       end
     
       # DELETE /bookings/1
