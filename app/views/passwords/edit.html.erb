@@ -1,0 +1,21 @@
+<h1 class="">Reset Password</h1>
+
+<%= form_with do |f| %>
+  
+  <div class='d-flex justify-content-center'>
+     <br/>
+    <%= f.label :password %>
+     <br/>
+    <%= f.password_field :password %>
+      <br/>
+    <%= f.label :password_confirmation %>
+      <br/>
+     <%= f.password_field :password_confirmation %>
+
+
+   
+  </div>
+   <br/>
+   <div class='actions'><%= f.submit 'Update password' %></div>
+<% end %>
+

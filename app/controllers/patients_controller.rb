@@ -17,20 +17,37 @@ class PatientsController < ApplicationController
             message: e
         }, status: :not_found
       end
+
+      def list_patient
+        @patients = Patient.where("user_id = ?",params[:user_id]).page(params[:page]).per(params[:per_page])
+
+        render json: {
+            data: @patients,
+            meta:{
+                page: params[:page],
+                # per_page: params[:per_page],
+                next_page: @patients.next_page,
+                prev_page: @patients.prev_page,
+                total_page: @patients.total_pages
+            }
+        },status: :ok
+
+        rescue ActiveRecord::RecordNotFound => e
+        render json: {
+            message: e
+        }, status: :not_found
+      end
     
       # POST /patients
       
       def create
-        patient = Patient.create(patients_params)
+        @patients = Patient.create(patients_params)
     
-        render json: {
-            data: patient
-        }, status: :created
-    
-      rescue StandardError => e
-        render json: {
-            message: e
-        }, status: :bad_request
+          if @patients.save
+               render json: @patients, status: :created
+          else
+               render json: @patients.errors, status: :unprocessable_entity
+          end
       end
     
       # PATCH/PUT /patients/1
@@ -48,7 +65,7 @@ class PatientsController < ApplicationController
     
         patient.destroy
     
-        render :json => {}, status: :ok
+        render json: {status:200, msg: 'Data patient has been deleted.'}
       end
     
       private
@@ -58,6 +75,6 @@ class PatientsController < ApplicationController
   
         # Only allow a list of trusted parameters through.
       def patients_params
-        params.permit(:patient_name, :status, :gender, :birth_date, :blood_type, :age)
+        params.permit(:user_id, :patient_name, :status, :gender, :birth_date, :blood_type, :age)
       end
 end

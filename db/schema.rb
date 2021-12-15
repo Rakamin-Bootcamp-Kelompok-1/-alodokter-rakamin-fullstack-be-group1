@@ -35,9 +35,11 @@ ActiveRecord::Schema.define(version: 2021_12_15_033238) do
     t.bigint "doctor_schedule_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
     t.index ["doctor_id"], name: "index_bookings_on_doctor_id"
     t.index ["doctor_schedule_id"], name: "index_bookings_on_doctor_schedule_id"
     t.index ["patient_id"], name: "index_bookings_on_patient_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
   create_table "doctor_schedules", force: :cascade do |t|
@@ -75,6 +77,8 @@ ActiveRecord::Schema.define(version: 2021_12_15_033238) do
     t.string "blood_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_patients_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -84,12 +88,16 @@ ActiveRecord::Schema.define(version: 2021_12_15_033238) do
     t.string "email"
     t.string "gender"
     t.string "birth_date"
-    t.integer "phone_number"
-    t.string "image_path"
+    t.string "phone_number"
+    t.string "image_data"
     t.boolean "is_admin"
     t.boolean "is_active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
   end
 
+  add_foreign_key "bookings", "users"
+  add_foreign_key "patients", "users"
 end
