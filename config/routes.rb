@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get "/article/category", to: "articles#findby_category"
   patch "articles/:id", to: "articles#update"
   delete "articles/:id", to: "articles#destroy"
+  get "article/search", to: "articles#search"
 
   resource :doctors, only: [:create]
   get "/doctors", to: "doctors#index"
