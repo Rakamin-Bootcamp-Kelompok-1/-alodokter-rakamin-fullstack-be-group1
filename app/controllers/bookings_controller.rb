@@ -29,9 +29,16 @@ class BookingsController < ApplicationController
       
     def history
       @bookings = Booking.where("user_id = ?",params[:user_id]).order("created_at DESC").page(params[:page]).per(params[:per_page])
-
       render json: {
-            data: @bookings,
+   #         data: @bookings.as_json(include: :doctor), 
+             data: @bookings.as_json(include: { doctor:{
+                    only: [:id, :doctor_name, :speciality, :image_path, :price_rate]
+                  }, patient: {
+                    only: [:id, :patient_name, :status, :birth_date, :age, :gender]
+                  }, doctor_schedule: {
+                    only: [:id, :day, :date, :month, :year, :time_practice]
+                  }
+              }),
             meta:{
                 page: params[:page],
                 # per_page: params[:per_page],
@@ -40,6 +47,8 @@ class BookingsController < ApplicationController
                 total_page: @bookings.total_pages
             }
       },status: :ok
+
+        
 
       rescue ActiveRecord::RecordNotFound => e
       render json: {
